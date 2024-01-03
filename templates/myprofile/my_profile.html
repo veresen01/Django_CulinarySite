@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+
+{% block main__title %}
+<title>Мой профиль</title>
+{% endblock %}
+
+{% block category %}
+{% endblock %}
+
+{% block title %}
+  <center>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light"><b>Привет {{ user }}</b></h1>
+          <h3 class="fw-light">Здесь отображены информация о вас и список ваших рецептов</h3>
+        </div>
+      </div>
+    </section>
+  </center>
+{% endblock %}
+
+{% block subtitle %}
+  <center>
+    <h1 class="fw-light">
+      <b>
+        Информация о пользователе
+      </b>
+    </h1>
+  </center>
+  <hr>
+  <center>
+    <table>
+        <div class="col-md-6">
+          <tr>
+            <td>
+              <h4>Ваше имя</h4>
+            </td>
+            <td>
+                <h4><pre>  -  </pre></h4>
+               </td>
+              <td>
+                <h4>{{ user.username }}</h4>
+               </td>
+          </tr>
+        </div>
+        <div class="col-md-6">
+          <tr>
+               <td>
+                <h4>Ваш Email</h4>
+              </td>
+              <td>
+                <h4><pre>  -  </pre></h4>
+              </td>
+              <td>
+                 <h4>{{ user.email }}</h4>
+               </td>
+           </tr>
+        </div>
+        <div class="col-md-6">
+          <tr>
+              <td>
+                <h4>Ваш город</h4>
+              </td>
+              <td>
+                <h4><pre>  -  </pre></h4>
+              </td>
+              <td>
+                <h4>{{ user.city }}</h4>
+              </td>
+          </tr>
+      </div>
+    </table>
+  </center>
+  <hr>
+{% endblock %}
+
+{% block content %}
+<center>
+  <a href="{% url 'create_recipe' %}" class="btn btn-primary">Добавить новый рецепт</a>
+  <hr>
+  <h1 class="fw-light">
+    <b>
+      Список рецептов
+    </b>
+  </h1>
+</center>
+{% for item in page_obj %}
+<center>
+<div class="container">
+  <div class="album py-5 bg-light" style="max-width: 600px;">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ item.img_recipe.url }}" alt="img_recipe">
+            <div class="card-body">
+              <b><p class="card-text">{{ item.name_recipe|linebreaks }}</p></b>
+              <p class="card-text">{{ item.description|linebreaks }}</p>
+              <div>
+                <div class="btn-group">
+                    <form action="{% url 'read_one_recipe' item.pk %}" class="inline">
+                      <button type="button " class="btn btn-sm btn-outline-secondary">Посмотреть рецепт</button>
+                    </form>
+                    <form action="{% url 'update_recipe' item.pk %}" class="inline">
+                      <button type="button " class="btn btn-sm btn-outline-secondary">Редактировать рецепт</button>
+                    </form>
+                    <form action="{% url 'delete_recipe' item.pk %}" class="inline">
+                      <button type="button " class="btn btn-sm btn-outline-secondary">Удалить рецепт</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</center>
+<ul class="pagination justify-content-center">
+  {% if page_obj.has_previous %}
+  <li class="page-item">
+    <a class="page-link" href="?page=1/">&laquo; Первая</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+  {% endif %}
+  </li>
+  {% for page in page_obj.paginator.page_range %}
+    {% if page == page_obj.number %}
+      <li class="page-item active"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+    {% else %}
+      <li><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+  </li>
+  <li class="page-item"></li>
+    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}

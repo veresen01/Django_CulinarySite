@@ -1,0 +1,120 @@
+{% extends 'base.html'%}
+
+{% block main__title %}
+    <title>Создание рецепта</title>
+{% endblock %}
+
+{% block category %}
+{% endblock %}
+
+{% block title %}
+    <center>
+        <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+            <b></b><h2 class="fw-light"><b>Заполните поля для добавления рецепта</b></h2></b>
+            </div>
+        </div>
+        <hr>
+        </section>
+    </center>
+{% endblock %}
+
+{% block content %}
+    <center>
+        <form method="post" enctype="multipart/form-data">
+            <table>
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="formFile" class="form-label">Выберите изображение</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.img_recipe }}
+                        </td>
+                    </tr>
+                </div>
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="exampleFormControlTextarea1" class="form-label">Наименвание блюда</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.name_recipe }}
+                        </td>
+                    </tr>
+                </div>
+
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="exampleFormControlTextarea1" class="form-label">Описание блюда</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.description }}>
+                        </td>
+                    </tr>
+                </div>
+
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="exampleFormControlTextarea1" class="form-label">Ингридиенты</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.ingredients }}
+                        </td>
+                    </tr>
+                </div>
+
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="exampleFormControlTextarea1" class="form-label">Процесс приготовления</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.cooking_process }}
+                        </td>
+                    </tr>
+                </div>
+
+                <div class="col-md-6">
+                    <tr>
+                        <td>
+                            <label for="id_category" class="form-label">Выберите Категорию</label>
+                        </td>
+                        <td>
+                            <h4><pre>    </pre></h4>
+                        </td>
+                        <td>
+                            {{ form.category }}
+                        </td>
+                    </tr>
+                </div>
+
+
+            </table>
+                <hr>
+                <button type="submit" class="btn btn-success">
+                    Сохранить рецепт и вернуться в свой профиль
+                </button>
+
+        </form>
+    </center>
+{% endblock %}

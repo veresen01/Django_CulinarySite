@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main__title %}
+<title>Вход в систему</title>
+{% endblock %}
+
+{% block content %}
+<center><h1>Войдите в свой профиль</h1></center>
+<hr>
+
+{% if form.errors %}
+    <p>{{ form.errors.error }}</p>
+{% endif %}
+<center>
+<form action="{% url 'login' %}" method="post">
+{{ form }}
+{% csrf_token %}
+<hr>
+<button type="submit" class="btn btn-success">Войти</button>
+</form>
+</center>
+<center>
+<a href="{% url 'password_reset' %}">Забыли пароль?</a>
+</center>
+{% endblock %}

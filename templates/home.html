@@ -1,0 +1,78 @@
+{% extends 'base.html'%}
+
+{% block main__title %}
+<title>Домашняя страница</title>
+{% endblock %}
+
+{% block category %}
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Категории рецептов
+    </button>
+    <ul class="dropdown-menu">
+      {% for category in category_list %}
+        <li><a class="dropdown-item" href="{% url 'category_recipes' category.pk %}">{{ category.name_category }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+
+{% block title %}
+  <center>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          {% if user.is_authenticated %}
+            <p><h5 class="fw-light"><b>Здраствуйте {{ user }} </h5></p>
+          {% endif %}
+
+          <b></b><h1 class="fw-light"><b>Сайт рецептов</b></h1></b>
+
+        </div>
+      </div>
+    </section>
+  </center>
+{% endblock %}
+
+
+{% block subtitle %}
+  <section class="text-center container">
+    <h1 class="fw-light">4 случайных блюда:</h1>
+    <h1>
+      {% for category in list_category %}
+        {{ category }}
+      {% endfor %}
+    </h1>
+      <a href="{% url 'home' %}" class="btn btn-primary my-2">Обновить рецепты</a>
+  </section>
+{% endblock %}
+
+
+{% block content %}
+{% for item in for_recipe %}
+<center>
+  <div class="album py-5 bg-light" style="max-width: 600px;">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ item.img_recipe.url }}" alt="img_recipe">
+            <div class="card-body">
+              <b><p class="card-text">{{ item.name_recipe|linebreaks }}</p></b>
+              <p class="card-text">{{ item.description|linebreaks }}</p>
+              <div>
+                <form action="{% url 'read_one_recipe' item.pk %}" class="inline">
+                  <button type="button " class="btn btn-sm btn-outline-secondary">Посмотреть рецепт</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</center>
+{% endfor %}
+{% endblock %}

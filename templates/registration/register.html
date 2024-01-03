@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block main__title %}
+<title>Регистрация</title>
+{% endblock %}
+
+{% block content %}
+    <center>
+            <h1>
+                Форма для регистрации
+            </h1>
+    </center>
+    <hr>
+    <center>
+
+        <form class="mb-3" action="{% url 'register' %}" method="post">
+            <table>
+            {% csrf_token %}
+            <div class="col-md-6">
+                <tr>
+                    <td>
+                        <label for="inputCity" class="form-label">Имя пользователя</label>
+                    </td>
+                    <td>
+                        {{ form.username }}
+                    </td>
+                </tr>
+            </div>
+            <div class="col-md-6">
+                <tr>
+                    <td>
+                        <label for="inputEmail4" class="form-label">Email</label>
+                    </td>
+                    <td>
+                        {{ form.email }}
+                    </td>
+                </tr>
+            </div>
+            <div class="col-md-6">
+                <tr>
+                    <td>
+                        <label for="inputCity" class="form-label">Родной город</label>
+                    </td>
+                    <td>
+                        {{ form.city}}
+                    </td>
+                </tr>
+            </div>
+            <div class="col-md-6">
+                <tr>
+                    <td>
+                        <label for="inputPassword4" class="form-label">Пароль</label>
+                    </td>
+                    <td>
+                        {{ form.password1}}
+                    </td>
+                </tr>
+            </div>
+            <div class="col-md-6">
+                <tr>
+                    <td>
+                        <label for="inputPassword4" class="form-label">Повторите пароль</label>
+                    </td>
+                    <td>
+                        {{ form.password2}}
+                    </td>
+                </tr>
+            </div>
+
+        </table>
+            <hr>
+            <button type="submit" class="btn btn-success">
+                Зарегистрироваться
+            </button>
+
+        </form>
+    </center>
+{% endblock %}

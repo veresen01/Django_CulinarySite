@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+
+{% block main__title %}
+<title>Рецепт</title>
+{% endblock %}
+
+{% block category %}
+{% endblock %}
+
+{% block title %}
+  <center>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light"><b>Рецепт</b></h1>
+          <h2 class="fw-light">{{ recipe.name_recipe|linebreaks }}</h1>
+          <h2 class="fw-light">автор блюда "{{ recipe.user }}"</h1>
+          
+        </div>
+      </div>
+    </section>
+  </center>
+{% endblock %}
+
+{% block subtitle %}
+
+<center>
+    <div class="album py-5 bg-light" style="max-width: 600px;">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="{{ recipe.img_recipe.url }}" alt="img_recipe">
+              <div class="card-body">
+                <b><p class="card-text">Категория блюда:</p></b>
+                <p class="card-text">{{ recipe.category.name_category|linebreaks }}</p>
+                <b><p class="card-text">Описание блюда:</p></b>
+                <p class="card-text">{{ recipe.description|linebreaks }}</p>
+                <b><p class="card-text">Ингридиенты:</p></b>
+                <p class="card-text">{{ recipe.ingredients|linebreaks }}</p>
+                <b><p class="card-text">Ход приготовления</p></b>
+                <p class="card-text">{{ recipe.cooking_process|linebreaks }}</p>
+                <div>
+                  <form action="{% url 'home' %}" class="inline">
+                    <button type="button " class="btn btn-sm btn-outline-secondary">Вернуться на главную</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </center>
+{% endblock %}
