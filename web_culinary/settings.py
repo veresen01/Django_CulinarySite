@@ -31,7 +31,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 
-                 'veresen10.pythonanywhere.com',
+                 'veresen16.pythonanywhere.com',
                  ]
 
 AUTH_USER_MODEL = 'user_app.UserAuth'
@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'web_culinary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'veresen10$default',
-        'USER': 'veresen10',
+        'NAME': 'veresen16$default',
+        'USER': 'veresen16',
         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': 'veresen10.mysql.pythonanywhere-services.com',
+        'HOST': 'veresen16.mysql.pythonanywhere-services.com',
         'OPTIONS': {
             'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8mb4',
